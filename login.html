@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <link rel="stylesheet" href="style/signup.css" />
+  </head>
+  <body>
+    <div class="signup-form">
+      <h2>Login</h2>
+      <form>
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </body>
+</html>
+
+<script>
+  var form = document.querySelector('form');
+
+  var userData = JSON.parse(localStorage.getItem('userData'));
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    var data = {
+      username: form.username.value,
+      password: form.password.value,
+    };
+
+    if (userData == null) {
+      alert('please Create an account');
+    } else if (
+      userData.username == data.username &&
+      userData.password == data.password
+    ) {
+      alert('sign in successful');
+
+      localStorage.setItem('signin', JSON.stringify(userData));
+      window.location.href = 'quiz.html';
+    } else {
+      alert('User Does not Exist');
+    }
+  });
+</script>
